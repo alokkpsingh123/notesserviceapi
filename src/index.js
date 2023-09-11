@@ -23,13 +23,15 @@ app.get("/", (req, res) => {
   res.send("API for Notes");
 });
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(
+    "mongodb+srv://alokkpsingh123:%40lokSingh123@cluster0.3ggp1uu.mongodb.net/notes_db?retryWrites=true&w=majority"
+  )
   .then(() => {
-    app.listen(PORT, () => {
-      console.log("Server started on port no. " + PORT);
+    app.listen(5000, () => {
+      console.log("Server started on port no. 5000");
     });
   })
   .catch((error) => {
