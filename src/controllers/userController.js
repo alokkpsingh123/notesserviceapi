@@ -2,7 +2,7 @@ const userModel = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "NOTESAPIALOK";
-
+``;
 const signup = async (req, res) => {
   //existing User check
   //hashed password
@@ -69,4 +69,15 @@ const singin = async (req, res) => {
   }
 };
 
-module.exports = { signup, singin };
+const signout = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await userModel.findByIdAndRemove(id);
+    res.status(202).json({ user: user, message: "Sign out successful" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+module.exports = { signup, singin, signout };
